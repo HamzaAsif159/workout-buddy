@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import Navbar from "@/components/Navbar";
 import WorkoutDetails from "@/components/WorkoutDetails";
+import WorkoutForm from "@/components/WorkoutForm";
 
 export default function Home() {
   const [workouts, setWorkouts] = useState(null);
@@ -26,6 +27,9 @@ export default function Home() {
             workouts.map((workout: any) => (
               <WorkoutDetails workout={workout} key={workout._id} />
             ))}
+        </div>
+        <div>
+          <WorkoutForm />
         </div>
       </div>
     </>
