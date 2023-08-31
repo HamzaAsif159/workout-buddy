@@ -17,7 +17,6 @@ export default function Home() {
         dispatch({ type: "SET_WORKOUTS", payload: json });
       }
     };
-    
 
     fetchWorkouts();
   }, []);
@@ -31,10 +30,15 @@ export default function Home() {
             workouts.map((workout: any) => (
               <WorkoutDetails workout={workout} key={workout._id} />
             ))}
+          {workouts <= 0 && (
+            <div className="workouts">
+              <div className="workouts-head">No workouts?</div>
+              <div>Add your workouts here...</div>
+            </div>
+          )}
         </div>
         <div>
           <WorkoutForm />
-        
         </div>
       </div>
     </>

@@ -68,6 +68,19 @@ header a {
   border-radius: 5px;
 }
 
+.workouts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -10px;
+  justify-content: center;
+}
+
+.workouts-head {
+  font-size: 25px;
+  font-weight: 700;
+}
+
 /* new workout form */
 label,
 input {
