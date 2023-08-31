@@ -4,7 +4,7 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const WorkoutDetails = ({ workout }: any) => {
   const { dispatch } = useWorkoutContext();
-  formatDistanceToNow;
+
   async function handeClick() {
     const response = await fetch(
       "http://localhost:4000/workout/" + workout._id,

@@ -18,6 +18,10 @@ export const workoutsReducer = (state, action) => {
           (workout) => workout._id !== action.payload._id
         ),
       };
+    case "DELETE_ALL_WORKOUTS":
+      return {
+        workouts: (state.workouts = []),
+      };
     default:
       return state;
   }

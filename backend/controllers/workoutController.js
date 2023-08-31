@@ -78,10 +78,20 @@ const deleteWorkout = async (req, res) => {
   }
 };
 
+const deleteAllWorkouts = async (req, res) => {
+  try {
+    let workout = await Workout.deleteMany({});
+    res.status(200).send(workout);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   createWorkout,
   getAllWorkouts,
   getSingleWorkout,
   updateWorkout,
   deleteWorkout,
+  deleteAllWorkouts,
 };

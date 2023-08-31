@@ -31,7 +31,7 @@ export default function Home() {
               <WorkoutDetails workout={workout} key={workout._id} />
             ))}
           {workouts <= 0 && (
-            <div className="workouts">
+            <div className="no-workouts">
               <div className="workouts-head">No workouts?</div>
               <div>Add your workouts here...</div>
             </div>
