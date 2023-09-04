@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const express = require("express");
 const workoutRouter = require("./routes/workout");
+const userRouter = require("./routes/user");
 const cors = require("cors");
 
 const app = express();
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/workout", workoutRouter);
+app.use("/user", userRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)
