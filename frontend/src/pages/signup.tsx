@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import { useSignup } from "../hooks/useSignup";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signup, error, loading } = useSignup();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    console.log(email, password);
+    signup(email, password);
   };
 
   return (
@@ -30,7 +32,8 @@ const Signup = () => {
           value={password}
         />
 
-        <button>Log in</button>
+        <button disabled={loading}>Sign up</button>
+        {error && <div className="error">{error}</div>}
       </form>
     </>
   );

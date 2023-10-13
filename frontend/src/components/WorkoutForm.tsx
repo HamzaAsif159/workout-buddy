@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const WorkoutForm = () => {
   async function DeleteAllWorkouts() {
     const response = await fetch("http://localhost:4000/workout/", {
       method: "DELETE",
+      headers: { Authorization: `Bearer ${user.token}` },
     });
 
     if (response.ok) {
@@ -14,12 +16,18 @@ const WorkoutForm = () => {
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [emptyFields, setEmptyFields] = useState([]);
   const { dispatch } = useWorkoutContext();
+  const { user } = useAuthContext();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (!user) {
+      setError("You must be logged in");
+      return;
+    }
 
     const workout = { title, load, reps };
 
@@ -28,18 +36,17 @@ const WorkoutForm = () => {
       body: JSON.stringify(workout),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     });
     const json = await response.json();
-
-    console.log(json);
 
     if (!response.ok) {
       setError(json.error);
       setEmptyFields(json.emptyFields);
     }
     if (response.ok) {
-      setError(null);
+      setError("");
       setTitle("");
       setLoad("");
       setReps("");

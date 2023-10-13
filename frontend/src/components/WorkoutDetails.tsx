@@ -1,15 +1,20 @@
-import Image from "next/image";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const WorkoutDetails = ({ workout }: any) => {
   const { dispatch } = useWorkoutContext();
+  const { user } = useAuthContext();
 
   async function handeClick() {
+    if (!user) {
+      return;
+    }
     const response = await fetch(
       "http://localhost:4000/workout/" + workout._id,
       {
         method: "DELETE",
+        headers: { Authorization: `Bearer ${user.token}` },
       }
     );
 

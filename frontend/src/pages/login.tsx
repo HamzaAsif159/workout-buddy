@@ -1,14 +1,19 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import { useLogin } from "../hooks/useLogin";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const { login, error, loading } = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    console.log(email, password);
+    await login(email, password);
+    router.push("/");
   };
 
   return (
@@ -30,7 +35,8 @@ const Login = () => {
           value={password}
         />
 
-        <button>Log in</button>
+        <button type="submit">Log in</button>
+        {error && <div className="error">{error}</div>}
       </form>
     </>
   );
